@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RD Chatbot Demo</title>
+</head>
+<body>
+    <h1>RD Chatbot Demo</h1>
+    <div>
+        <div>
+            <label for="question">Question: </label>
+            <input type="text" id="question"/>
+            <input id="getAnswer" type="button" value="Get Answer"/>
+        </div>
+        <div>
+            <label for="answer">Answer: </label>
+            <h2 id="answer"></h2>
+            <label for="ratio">Ratio: </label>
+            <h2 id="ratio"></h2>
+        </div>
+    </div>
+</body>
+<footer>
+    <script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#getAnswer").on('click', function () {
+                $.ajax({
+                    url: "/ask",
+                    data: {question:$("#question").val()}
+                }).done(function(response) {
+                    var response = JSON.parse(response);
+                    console.log(response);
+                    $("#answer").html(response.value);
+                    $("#ratio").html(response.ratio);
+                });
+            })
+        })
+    </script>
+</footer>
+</html>
