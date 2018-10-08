@@ -16,10 +16,9 @@ $router->get('/', function () {
 $router->get('ask', [
     'as' => 'bot', 'uses' => 'BotController@index'
 ]);
-$router->get('test', function() {
-    return 'This is a Test';
-});
-$router->post('challenge', [
-    'as' => 'bot_send_message', 'uses' => 'BotController@postMessage'
-]);
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass unix:/var/run/php5-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
 
