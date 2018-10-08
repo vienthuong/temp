@@ -29,8 +29,8 @@ class BotController extends Controller
         $process = new Process($fuzz);
         // Prints the names and majors of students in a sample spreadsheet:
         // https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
-        $spreadsheetId = '1r9LKjExCisiy66niFoZHNgwyTZmLh6gd62d2v4GIDM0';
-        $range = 'Sheet1!A2:C';
+	$spreadsheetId = '14RoXzXTkHLBGaMgquflzzN8T-xQY5X5wOXeEQlf9EH0';
+        $range = 'AI!A2:C';
 
         try{
             $response = $this->service->spreadsheets_values->get($spreadsheetId, $range);
