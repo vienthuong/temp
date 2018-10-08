@@ -8,7 +8,7 @@ use App\Bot;
 class BotController extends Controller
 {
     protected $bot;
-    
+
     /**
      * Create a new controller instance.
      *
@@ -38,15 +38,16 @@ class BotController extends Controller
     public function postMessage(Request $request)
     {
         info($request->all());
-        if(empty($request->post('event')['bot_id']) || $request->post('event')['bot_id'] !== 'BDAENJ614') {
+        if(!empty($request->post('event')) && empty($request->post('event')['bot_id'])) {
             $question = $request->post('event')['text'];
             $rand_answer = $this->bot->getBestAnswer($question);
-
+	    info('Question: ' . $question);
+	    info('Answer: ' . $rand_answer['value']);
             $url = 'https://slack.com/api/chat.postMessage';
             $ch = curl_init();
             $message = [];
-            $message['channel'] = 'CDAEGEG14';
-            $message['text'] = $rand_answer;
+            $message['channel'] = $request->post('event')['channel'];
+            $message['text'] = $rand_answer['value'];
 
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -67,7 +68,7 @@ class BotController extends Controller
             curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
             $contents = curl_exec($ch);
             $headers = curl_getinfo($ch);
-            curl_close($ch);
+	    curl_close($ch);
             die(json_encode(array($rand_answer, $contents, $headers)));
         }
 

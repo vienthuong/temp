@@ -54,7 +54,9 @@ class Bot extends Model
 
         $rand_answer = [];
         $rand_answer['value'] = $answers[array_rand($answers)][2];
-        $rand_answer['ratio'] = $bestChoice[1] . '%';
+	$rand_answer['ratio'] = $bestChoice[1] . '%';
+
+	return $rand_answer;
     }
 
     public function getSheetData()
