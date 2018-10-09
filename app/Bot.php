@@ -10,6 +10,7 @@ use Google_Client;
 
 class Bot extends Model
 {
+    protected $table = 'bots';	   
     protected $fillable = [
         //
     ];

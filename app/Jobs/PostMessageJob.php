@@ -17,6 +17,7 @@ class PostMessageJob extends Job
      */
     public function __construct(Bot $bot, $question = '', $channel = '')
     {
+	info('========QUEUE RUNNING===========');
         $this->bot = $bot;
         $this->question = $question;
         $this->channel = $channel;
@@ -29,6 +30,7 @@ class PostMessageJob extends Job
      */
     public function handle()
     {
+	    info('RUNNING');
         $rand_answer = $this->bot->getBestAnswer($this->question);
         info('Question: ' . $this->question);
         info('Answer: ' . $rand_answer['value']);
