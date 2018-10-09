@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Bots extends Migration
+class Users extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class Bots extends Migration
      */
     public function up()
     {
-        Schema::create('bots', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('email');
+            $table->string('password');
             $table->timestamps();
         });
     }
@@ -27,7 +29,7 @@ class Bots extends Migration
      */
     public function down()
     {
-	    Schema::drop('bots');
+	    Schema::drop('users');
     }
 }
 

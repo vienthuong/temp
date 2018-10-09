@@ -2,11 +2,11 @@
 
 namespace App\Jobs;
 
-use App\Bot;
+use App\Services\BotService;
 
 class PostMessageJob extends Job
 {
-    protected $bot;
+    protected $botService;
     protected $question;
     protected $channel;
 
@@ -15,9 +15,10 @@ class PostMessageJob extends Job
      *
      * @return void
      */
-    public function __construct(Bot $bot, $question = '', $channel = '')
+    public function __construct(BotService $botService, $question = '', $channel = '')
     {
-        $this->bot = $bot;
+	    info('========QUEUE RUNNING===========');
+        $this->botService = $botService;
         $this->question = $question;
         $this->channel = $channel;
     }
@@ -29,7 +30,8 @@ class PostMessageJob extends Job
      */
     public function handle()
     {
-        $rand_answer = $this->bot->getBestAnswer($this->question);
+	    info('RUNNING');
+        $rand_answer = $this->botService->getBestAnswer($this->question);
         info('Question: ' . $this->question);
         info('Answer: ' . $rand_answer['value']);
         $url = 'https://slack.com/api/chat.postMessage';
